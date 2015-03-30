@@ -25,6 +25,7 @@ import click
 @click.argument('blueprint')
 @click.argument('workdirpath', type=click.Path(exists=True))
 def runserver(blueprint,workdirpath):
+  global DUMMYWORKDIR
   DUMMYWORKDIR = workdirpath
   themodule = importlib.import_module(blueprint)
   app.register_blueprint(themodule.blueprint, url_prefix='/'+themodule.RECAST_ANALYSIS_ID)
