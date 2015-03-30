@@ -6,8 +6,6 @@ import uuid
 import importlib
 
 
-DUMMYRESULT_DIR = '/Users/lukas/Code/atlas/recast-dev/dummy_workdir'
-
 @task
 def postresults(jobguid,requestId,parameter_point,resultlister):
   workdir = 'workdirs/{}'.format(jobguid)
@@ -25,6 +23,8 @@ def postresults(jobguid,requestId,parameter_point,resultlister):
       shutil.copytree(resultpath,'{}/{}'.format(resultdir,result))
 
 
+  DUMMYRESULT_DIR = os.environ['RECAST_DUMMYWORKDIR']
+  assert DUMMYRESULT_DIR
   if(os.path.exists(DUMMYRESULT_DIR)):
     shutil.rmtree(DUMMYRESULT_DIR)
 
