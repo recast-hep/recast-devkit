@@ -18,7 +18,10 @@ setup(
     'Flask',
     'gevent',
     'gevent-socketio',
+    'recast-backend',
+    'click'
   ],
   dependency_links = [
+    'https://github.com/lukasheinrich/recast-backend/tarball/master#egg=recast-backend-0.0.1'
   ]
 )
