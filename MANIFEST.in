@@ -1,0 +1,2 @@
+recursive-include recastdevserver/templates *
+recursive-include recastdevserver/static *
