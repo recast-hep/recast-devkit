@@ -10,7 +10,8 @@ setup(
   author_email = 'lukas.heinrich@cern.ch',
   packages=find_packages(),
   entry_points={
-        'console_scripts': ['recast-devserver = recastdevkit.devserver.server:runserver']
+        'console_scripts': ['recast-devserver = recastdevkit.devserver.server:runserver',
+                            'recast-devsub = recastdevkit.devbackend.submitcli:submit']
       },
   include_package_data=True,
   zip_safe=False,
