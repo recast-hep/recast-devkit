@@ -3,7 +3,6 @@ import recastdevkit.devbackend.devtasks
 import redis
 import msgpack
 import celery
-import IPython
 import time
 
 def get_parents(child):
