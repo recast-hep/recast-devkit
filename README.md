@@ -8,7 +8,7 @@ to start the server use the recast-devserver entry point and provide as argument
 
 to start the development backend celery instance to something like
 
-    RECAST_DUMMYWORKDIR=$PWD/dummy_workdir celery worker -A recastdevkit.devbackend.localapp:app -I recasthelloworld.backendtasks,recastbackend.backendtasks,recastdevkit.devbackend.devtasks -l info -Q hello_world_queue
+    RECAST_DUMMYWORKDIR=$PWD/dummy_workdir celery worker -A recastdevkit.devbackend.localapp:app -I recasthelloworld.backendtasks -l info -Q hello_world_queue
 
 to submit the analysis chain to something like
     
