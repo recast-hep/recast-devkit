@@ -17,7 +17,7 @@ to submit the analysis chain to something like
 instead of starting all processes independently in separate shells you can also install honcho and prepare a Procfile like this
 
     redis: redis-server
-    celery: RECAST_DUMMYWORKDIR=/home/analysis/newplugin/resultdir celery worker -A recastdevkit.devbackend.localapp:app -I recasthelloworld.backendtasks -l info -Q hello_world_queue
+    celery: RECAST_DUMMYWORKDIR=$PWD/resultdir celery worker -A recastdevkit.devbackend.localapp:app -I recasthelloworld.backendtasks -l info -Q hello_world_queue
     server: recast-devserver recasthelloworld.blueprint $PWD/resultdir
 
 and then run
