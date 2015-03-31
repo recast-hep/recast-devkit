@@ -1,5 +1,6 @@
-# recast-dev-server
-development server for RECAST for analysis plugin development
+# recast-devkit
+
+mini development kit for developing RECAST plugins
 
 to start the server use the recast-devserver entry point and provide as arguments the blueprint module and the working directory from which to pull result files
 
