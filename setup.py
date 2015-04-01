@@ -23,6 +23,6 @@ setup(
     'click'
   ],
   dependency_links = [
-    'https://github.com/lukasheinrich/recast-backend/tarball/master#egg=recast-backend-0.0.1'
+    'https://github.com/recast-hep/recast-backend/tarball/master#egg=recast-backend-0.0.1'
   ]
 )
