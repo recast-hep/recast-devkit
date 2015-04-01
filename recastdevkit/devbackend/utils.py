@@ -1,5 +1,6 @@
 import recastbackend.backendtasks  
 import recastdevkit.devbackend.devtasks
+import recastbackend.utils
 import uuid
 
 def postchain(request_uuid,point,queuename,resultlist):           
@@ -9,7 +10,7 @@ def postchain(request_uuid,point,queuename,resultlist):
 def wrapped_chain(request_uuid,point,analysis_chain,resultlist,queuename):
   jobguid = uuid.uuid1()
   
-  pre  =  recastbackend.backendtasks.prechain(request_uuid,point,jobguid,queuename)
+  pre  =  recastbackend.utils.prechain(request_uuid,point,jobguid,queuename)
   post =  postchain(request_uuid,point,queuename,resultlist)
 
   chain = (pre | analysis_chain | post)

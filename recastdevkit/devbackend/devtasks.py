@@ -1,8 +1,8 @@
-from celery import task
+from celery import shared_task
 import os
 import shutil
 
-@task
+@shared_task
 def postresults(jobguid,requestId,parameter_point,resultlister):
   workdir = 'workdirs/{}'.format(jobguid)
   resultdir = 'results/{}/{}'.format(requestId,parameter_point)
@@ -19,11 +19,13 @@ def postresults(jobguid,requestId,parameter_point,resultlister):
       shutil.copytree(resultpath,'{}/{}'.format(resultdir,result))
 
 
-  DUMMYRESULT_DIR = os.environ['RECAST_DUMMYWORKDIR']
-  assert DUMMYRESULT_DIR
-  if(os.path.exists(DUMMYRESULT_DIR)):
-    shutil.rmtree(DUMMYRESULT_DIR)
+  DUMMYRESULTDIR = os.environ['RECAST_DUMMYRESULTDIR']
+  assert DUMMYRESULTDIR
 
-  shutil.copytree(resultdir, DUMMYRESULT_DIR)
+  dedicated_dir = '{}/dedicated'.format(DUMMYRESULTDIR)
+  if(os.path.exists(dedicated_dir)):
+    shutil.rmtree(dedicated_dir)
+
+  shutil.copytree(resultdir, dedicated_dir)
 
   return requestId
