@@ -1,9 +1,10 @@
 from celery import shared_task
+from recastbackend.logging import socketlog
 import os
 import shutil
 
 @shared_task
-def postresults(jobguid,requestId,parameter_point,resultlister):
+def postresults(jobguid,requestId,parameter_point,resultlister,backend):
   workdir = 'workdirs/{}'.format(jobguid)
   resultdir = 'results/{}/{}'.format(requestId,parameter_point)
   
@@ -22,10 +23,12 @@ def postresults(jobguid,requestId,parameter_point,resultlister):
   DUMMYRESULTDIR = os.environ['RECAST_DUMMYRESULTDIR']
   assert DUMMYRESULTDIR
 
-  dedicated_dir = '{}/dedicated'.format(DUMMYRESULTDIR)
+  dedicated_dir = '{}/{}'.format(DUMMYRESULTDIR,backend)
   if(os.path.exists(dedicated_dir)):
     shutil.rmtree(dedicated_dir)
 
   shutil.copytree(resultdir, dedicated_dir)
+
+  socketlog(jobguid,'done')
 
   return requestId
