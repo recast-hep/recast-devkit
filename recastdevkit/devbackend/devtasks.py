@@ -16,9 +16,11 @@ def postresults(jobguid,requestId,parameter_point,resultlister,backend):
   for result,resultpath in ((r,os.path.abspath('{}/{}'.format(workdir,r))) for r in resultlister()):
     if os.path.isfile(resultpath):
       shutil.copyfile(resultpath,'{}/{}'.format(resultdir,result))
-    if os.path.isdir(resultpath):
+    elif os.path.isdir(resultpath):
       shutil.copytree(resultpath,'{}/{}'.format(resultdir,result))
-
+    else:
+      socketlog(jobguid,'result is neither file nor dir or not present: {}'.format(resultpath))
+      raise IOError
 
   DUMMYRESULTDIR = os.environ['RECAST_DUMMYRESULTDIR']
   assert DUMMYRESULTDIR
