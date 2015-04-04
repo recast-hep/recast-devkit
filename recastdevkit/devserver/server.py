@@ -29,6 +29,7 @@ def runserver(blueprint,workdirpath):
   DUMMYWORKDIR = workdirpath
   themodule = importlib.import_module(blueprint)
 
+  os.environ['RECAST_CONTENT_PATH_TEMPL'] = DUMMYWORKDIR
   app.register_blueprint(themodule.blueprint, url_prefix='/testblueprint')
   port = 8000
   host = '0.0.0.0'

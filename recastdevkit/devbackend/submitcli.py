@@ -1,30 +1,54 @@
 import click
-import recastdevkit.devbackend.utils
 import importlib
-from recastbackend.submission import agnostic_celery_submit
+import recastbackend.backendtasks
+import recastdevkit.devbackend.devtasks
+
 from recastbackend.submitter import wait_and_echo
-
 from recastdevkit.devbackend.localapp import app
-
+from recastbackend.backendtasks import run_analysis
 
 def development_dedicated_celery_submit(uuid,parameter,modulename):
   queue = 'celery'
-  module = importlib.import_module(modulename)
-  resultlist = module.resultlist
-  analysis_chain = module.get_chain(queue)
-  
-  return agnostic_celery_submit(uuid, parameter, queue, analysis_chain, resultlist,
-                                recastdevkit.devbackend.utils.wrapped_chain,'dedicated')
+  jobguid = '0.0.0.0'
+  app.set_current()
 
+  ctx = dict(
+      jobguid       = jobguid,
+      requestguid   = uuid,
+      parameter_pt  = parameter,
+      entry_point   = '{}:recast'.format(modulename),
+      results       = '{}:resultlist'.format(modulename),
+      backend       = 'dedicated'
+  )
+
+  result =  run_analysis.apply_async((recastbackend.backendtasks.setup,
+                                      recastdevkit.devbackend.devtasks.onsuccess,
+                                      recastbackend.backendtasks.cleanup,ctx),
+                                      queue = queue)
+  return (jobguid,result)
+  
 
 def development_rivet_celery_submit(uuid,parameter,analysis):
   queue = 'celery'
-  module = importlib.import_module('recastrivet.backendtasks')
-  resultlist = module.resultlist
-  analysis_chain = module.get_chain(queue,analysis)
-  
-  return agnostic_celery_submit(uuid, parameter, queue, analysis_chain, resultlist,
-                                recastdevkit.devbackend.utils.wrapped_chain,'rivet')
+  jobguid = '0.0.0.0'
+  app.set_current()
+
+  ctx = dict(
+      jobguid       = jobguid,
+      requestguid   = uuid,
+      parameter_pt  = parameter,
+      entry_point   = '{}:recast'.format('recastrivet.backendtasks'),
+      results       = '{}:resultlist'.format('recastrivet.backendtasks'),
+      backend       = 'rivet',
+      analysis      = analysis
+  )
+
+  result =  run_analysis.apply_async((recastbackend.backendtasks.setup,
+                                      recastdevkit.devbackend.devtasks.onsuccess,
+                                      recastbackend.backendtasks.cleanup,ctx),
+                                      queue = queue)
+
+  return (jobguid,result)
 
 
 @click.group()

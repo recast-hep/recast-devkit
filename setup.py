@@ -20,9 +20,12 @@ setup(
     'gevent',
     'gevent-socketio',
     'recast-backend',
+    'socket.io-emitter',
     'click'
+    
   ],
   dependency_links = [
+    'https://github.com/ziyasal/socket.io-python-emitter/tarball/master#egg=socket.io-emitter-0.1.3',
     'https://github.com/recast-hep/recast-backend/tarball/master#egg=recast-backend-0.0.1'
   ]
 )
