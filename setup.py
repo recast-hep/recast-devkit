@@ -11,7 +11,8 @@ setup(
   packages=find_packages(),
   entry_points={
         'console_scripts': ['recast-devserver = recastdevkit.devserver.server:runserver',
-                            'recast-devsub = recastdevkit.devbackend.submitcli:cli']
+                            'recast-devsub = recastdevkit.devbackend.submitcli:cli',
+                            'recast-devbackend = recastdevkit.devbackend.celerycli:startcelery']
       },
   include_package_data=True,
   zip_safe=False,
