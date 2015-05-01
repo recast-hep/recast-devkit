@@ -7,7 +7,10 @@ from recastbackend.backendtasks import isolate_results
 log = logging.getLogger('RECAST')
 
 def onsuccess(ctx):
-  log.info('success!')
+  DUMMYRESULTDIR = os.environ['RECAST_DUMMYRESULTDIR']
+  assert DUMMYRESULTDIR
+  
+  log.info('dev version of onsuccess. copying into: {}'.format(DUMMYRESULTDIR))
 
   jobguid = ctx['jobguid']
   resultlistname = ctx['results']
@@ -19,8 +22,6 @@ def onsuccess(ctx):
   
   resultdir = isolate_results(jobguid,resultlister)
 
-  DUMMYRESULTDIR = os.environ['RECAST_DUMMYRESULTDIR']
-  assert DUMMYRESULTDIR
 
   dedicated_dir = '{}/{}'.format(DUMMYRESULTDIR,backend)
   if(os.path.exists(dedicated_dir)):
