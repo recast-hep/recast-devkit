@@ -12,6 +12,7 @@ setup(
   entry_points={
         'console_scripts': ['recast-devserver = recastdevkit.devserver.server:runserver',
                             'recast-devsub = recastdevkit.devbackend.submitcli:cli',
+                            'recast-devsub-local = recastdevkit.devbackend.localfilesubmit:cli',
                             'recast-devbackend = recastdevkit.devbackend.celerycli:startcelery']
       },
   include_package_data=True,
