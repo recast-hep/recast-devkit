@@ -1,5 +1,4 @@
-Build 
-
+[![Build Status](https://travis-ci.org/recast-hep/recast-devkit.svg?branch=master)](https://travis-ci.org/recast-hep/recast-devkit)
 # recast-devkit
 
 mini development kit for developing RECAST plugins
