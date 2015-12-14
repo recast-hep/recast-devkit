@@ -3,7 +3,7 @@ import importlib
 import recastbackend.backendtasks
 import recastdevkit.devbackend.devtasks
 
-from recastbackend.submitter import wait_and_echo
+from recastbackend.listener import wait_and_echo
 from recastdevkit.devbackend.localapp import app
 from recastbackend.backendtasks import run_analysis
 
