@@ -4,7 +4,6 @@ import recastdevkit.devbackend.devtasks
 import recastdevkit.devbackend.localjobsetup
 
 from recastbackend.listener import wait_and_echo
-from recastdevkit.devbackend.localapp import app
 from recastbackend.backendtasks import run_analysis
 
 import yaml
