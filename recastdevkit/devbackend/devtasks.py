@@ -20,7 +20,7 @@ def onsuccess(ctx):
   module = importlib.import_module(modulename)
   resultlister = getattr(module,attr)
   
-  resultdir = isolate_results(jobguid,resultlister)
+  resultdir = isolate_results(jobguid,resultlister())
 
 
   dedicated_dir = '{}/{}'.format(DUMMYRESULTDIR,backend)
